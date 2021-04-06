@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/verify-email/success', function(){
+    return view('notification.emailVerificationSuccess');
+})->name('web-email-sucess');
+
+
+
+Route::get('/verify-email/failed', function(){
+    return view('notification.emailVerificationFailed');
+})->name('web-email-failed');

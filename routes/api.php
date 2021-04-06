@@ -14,6 +14,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('/', function () {
+    return view('welcome');
 });
+
+
+Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
+
+    Route::get('/user', function (Request $request) {
+        return response()->json($request->user(), 200);
+    });
+
+
+    Route::get('/dashboard', function (Request $request) {
+        return response()->json([
+            'message' => "Welcome to Dashboard"
+        ], 200);
+    })->name('dashboard');
+
+});
+
+require __DIR__.'/auth.php';
